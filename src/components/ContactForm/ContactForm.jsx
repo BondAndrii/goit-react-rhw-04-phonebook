@@ -1,9 +1,14 @@
 import React, { Component } from "react";
-import { nanoid } from "nanoid";
-import PropTypes from "prop-types";
-import "./Form.css"
 
-class Form extends Component {
+import { nanoid } from "nanoid";
+
+import styles from "./ContactForm.module.css"
+
+import PropTypes from "prop-types";
+
+
+
+export class ContactForm extends Component {
     state = {
         id:'',
         name: '',
@@ -35,17 +40,18 @@ class Form extends Component {
         this.setState({ id:'', name: '', number:'', });
     };
     render() {
+    const { name, number } = this.state;
         return (
             
-            <form className="Form" onSubmit={this.handleSubmit}>
+            <form className={styles.Form} onSubmit={this.handleSubmit}>
                 <label className="Label" htmlFor={this.nameId}>
-                    <p className="Text">Iм'я:</p>
+                    <p className={styles.Text}>Iм'я:</p>
                     <input
                         type="text"
                         name="name"
-                        className="Input"
+                        className={styles.Input}
                         id={this.nameId}
-                        value={this.state.name}
+                        value={name}
                         onChange={this.handleChange}
                         placeholder="введи ім'я"
                         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -55,12 +61,12 @@ class Form extends Component {
                 </label>
                
                 <label className="Label" htmlFor={this.numberId}>
-                    <p className="Text">Номер:</p>
+                    <p className={styles.Text}>Номер:</p>
                     <input
                         type="tel"
                         name="number"
-                        className="Input"
-                        value={this.state.number}
+                        className={styles.Input}
+                        value={number}
                         id={this.numberId}
                         onChange={this.handleChange}
                         placeholder="введи номер телефону"
@@ -70,15 +76,15 @@ class Form extends Component {
                     />
                 </label>
                 
-                <button className="Button" type="submit">Запиши!</button>
+                <button className={styles.Button} type="submit">Запиши!</button>
             </form>
             
                 
         );
     }
 }
-export default Form;
 
-Form.propTypes= {
+
+ContactForm.propTypes= {
     priSubmit: PropTypes.func.isRequired,
 }
